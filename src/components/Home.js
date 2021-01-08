@@ -1,13 +1,13 @@
-import React from 'react'
-import { Card, CardContent, CardActions, Divider } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import cars from '../cars.json' // remove this
+import React, {useContext} from 'react';
+import { Card, CardContent, CardActions, Divider } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import {StoreContext} from '../redux/store';
 
-const Home = (props) => {
+export let Home = (props) => {
+    let { store } = useContext(StoreContext);
     return (
-        <div className="card-container">
-            {/* Change cars to props.cars and remove the cars.json import above */}
-            {cars.map((car, idx) => (
+        <div className="card-container">            
+            {store.cars.map((car, idx) => (
                 <Card key={idx} className="card">
                     <CardContent className="text-gray">
                         <span>{car.Name.toUpperCase()}</span>
@@ -26,6 +26,5 @@ const Home = (props) => {
             ))}
         </div>
     )
-}
+};
 
-export default Home

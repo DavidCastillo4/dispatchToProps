@@ -1,24 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react';
 import { Container, Paper, Chip } from '@material-ui/core';
-import cars from '../cars.json' // remove this
+import { StoreContext } from '../redux/store';
 
-const Car = (props) => {
-    const id = props.match.params.id
-    {/* Change cars to props.cars and remove the cars.json import above */}
-    const car = cars.find(c => c.id == id)
-
+export let Car = (props) => {
+    let id = props.match.params.id;
+    let { store } = useContext(StoreContext);
+    let car = store.cars.find(c => c.id.toString() === id)
     return (
         <Container maxWidth="sm" className="car-container">
             <Paper className="car-paper">
                 <h2>{car.Name}</h2>
                 {
                     Object.keys(car).map((key, idx) => {
-                        return <Chip label={`${key}: ${car[key]}`}></Chip>
+                        return <Chip key={idx} label={`${key}: ${car[key]}`}></Chip>
                     })
                 }
             </Paper>
         </Container>
     )
-}
+};
 
-export default Car

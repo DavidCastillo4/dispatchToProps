@@ -1,19 +1,12 @@
-import React from 'react'
-import {
-    Container,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow
-} from '@material-ui/core'
-import cars from '../cars.json' // remove this
+import React, { useContext } from 'react';
+import { Container, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { StoreContext } from '../redux/store';
 
-const Dashboard = (props) => {
+export let Dashboard = (props) => {
+    let { store } = useContext(StoreContext); 
     return (
-        <Container maxWidth="lg" className="car-container">
-            {/* Change NAME to props.user.username */}
-            <h4>Welcome, {`NAME`}</h4>
+        <Container maxWidth="lg" className="car-container">            
+            <h4>Welcome, {`${store.user.username}`}</h4>
             <Table>
                 <TableHead>
                     <TableRow>
@@ -30,27 +23,26 @@ const Dashboard = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                {/* Change cars to props.cars and remove the cars.json import above */}
-                {cars.map(car => (
-                    <TableRow key={car.id}>
-                        <TableCell component="th" scope="row">
-                            {car.id}
-                        </TableCell>
-                        <TableCell>{car["Name"]}</TableCell>
-                        <TableCell>{car["Miles_per_Gallon"]}</TableCell>
-                        <TableCell>{car["Cylinders"]}</TableCell>
-                        <TableCell>{car["Displacement"]}</TableCell>
-                        <TableCell>{car["Horsepower"]}</TableCell>
-                        <TableCell>{car["Weight_in_lbs"]}</TableCell>
-                        <TableCell>{car["Acceleration"]}</TableCell>
-                        <TableCell>{car["Year"]}</TableCell>
-                        <TableCell>{car["Origin"]}</TableCell>
-                    </TableRow>
-                ))}
+                    {/* Change cars to props.cars and remove the cars.json import above */}
+                    {store.cars.map(car => (
+                        <TableRow key={car.id}>
+                            <TableCell component="th" scope="row">
+                                {car.id}
+                            </TableCell>
+                            <TableCell>{car["Name"]}</TableCell>
+                            <TableCell>{car["Miles_per_Gallon"]}</TableCell>
+                            <TableCell>{car["Cylinders"]}</TableCell>
+                            <TableCell>{car["Displacement"]}</TableCell>
+                            <TableCell>{car["Horsepower"]}</TableCell>
+                            <TableCell>{car["Weight_in_lbs"]}</TableCell>
+                            <TableCell>{car["Acceleration"]}</TableCell>
+                            <TableCell>{car["Year"]}</TableCell>
+                            <TableCell>{car["Origin"]}</TableCell>
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
         </Container>
     )
-}
+};
 
-export default Dashboard
