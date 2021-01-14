@@ -9,7 +9,7 @@ export let Car = (props) => {
     return (
         <Container maxWidth="sm" className="car-container">
             <Paper className="car-paper">
-                <h2>{car.Name}</h2>
+                <h2>{car.name}</h2>
                 {
                     Object.keys(car).map((key, idx) => {
                         return <Chip key={idx} label={`${key}: ${car[key]}`}></Chip>

@@ -5,7 +5,7 @@ class About extends Component {
     state = {
         checked: true,
         heading: 'About FakeCars.com'
-    }
+    };
 
     toggleSwitch = () => {
         const newVal = !this.state.checked
@@ -19,7 +19,7 @@ class About extends Component {
             heading: 'About Cars.com',
             checked: newVal
         })
-    }
+    };
 
     render() {
         return (
@@ -34,7 +34,7 @@ class About extends Component {
                         get sued by the real&nbsp; 
                         <a style={{ color: 'mediumblue' }}
                         href="https://www.cars.com"
-                        target="_blank">Cars.com</a>
+                        target="new">Cars.com</a>
                         &nbsp;but we won't worry too much about that. We've provided a 
                         link to the actual cars.com above and we did not 
                         receive any money from them to do so. Although, there's 
@@ -56,7 +56,7 @@ class About extends Component {
                 </Container>
             </div>
         )
-    }
-}
+    };
+};
 
 export default About

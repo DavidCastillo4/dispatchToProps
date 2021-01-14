@@ -5,7 +5,7 @@ export let StoreContext = createContext();
 export let StoreProvider = (props) => {
   let [store, setStore] = useState(state);
   return (
-    <StoreContext.Provider value={{ store }}>
+    <StoreContext.Provider value={{ store, setStore }}>
       {props.children}
     </StoreContext.Provider>
   );

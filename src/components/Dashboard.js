@@ -1,12 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useReducer } from 'react';
 import { Container, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { Chart } from './Chart';
+import { Total } from './Total';
 import { StoreContext } from '../redux/store';
+import { AddCar } from './AddCar';
+import {ACTIONS, reducer} from '../redux/reducers';
 
-export let Dashboard = (props) => {
-    let { store } = useContext(StoreContext); 
+export let Dashboard = (props) => {    
+    let { store, setStore } = useContext(StoreContext);
+    let [vals, dispatch] = useReducer(reducer, store);   
+
     return (
-        <Container maxWidth="lg" className="car-container">            
+        <Container maxWidth="lg" className="car-container">
             <h4>Welcome, {`${store.user.username}`}</h4>
+            <div className="flex-container">
+                <Chart store={store} />
+                <Total store={store} />
+                <AddCar dispatch={dispatch}/>
+            </div>
             <Table>
                 <TableHead>
                     <TableRow>
@@ -14,30 +26,25 @@ export let Dashboard = (props) => {
                         <TableCell>Make/Model</TableCell>
                         <TableCell>MPG</TableCell>
                         <TableCell>Cylinders</TableCell>
-                        <TableCell>Displacement</TableCell>
                         <TableCell>Horsepower</TableCell>
-                        <TableCell>Weight</TableCell>
-                        <TableCell>Acceleration</TableCell>
-                        <TableCell>Year</TableCell>
-                        <TableCell>Origin</TableCell>
+                        <TableCell>Delete</TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>
-                    {/* Change cars to props.cars and remove the cars.json import above */}
+                <TableBody>                    
                     {store.cars.map(car => (
                         <TableRow key={car.id}>
                             <TableCell component="th" scope="row">
                                 {car.id}
                             </TableCell>
-                            <TableCell>{car["Name"]}</TableCell>
-                            <TableCell>{car["Miles_per_Gallon"]}</TableCell>
-                            <TableCell>{car["Cylinders"]}</TableCell>
-                            <TableCell>{car["Displacement"]}</TableCell>
-                            <TableCell>{car["Horsepower"]}</TableCell>
-                            <TableCell>{car["Weight_in_lbs"]}</TableCell>
-                            <TableCell>{car["Acceleration"]}</TableCell>
-                            <TableCell>{car["Year"]}</TableCell>
-                            <TableCell>{car["Origin"]}</TableCell>
+                            <TableCell>{car["name"]}</TableCell>
+                            <TableCell>{car["mpg"]}</TableCell>
+                            <TableCell>{car["cylinders"]}</TableCell>
+                            <TableCell>{car["horsepower"]}</TableCell>
+                            <TableCell>
+                                <DeleteIcon                                    
+                                    onClick={() => dispatch({type: ACTIONS.DELETE_CAR, payload: {id: car.id}})}
+                                    className="icon text-red" />
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -45,4 +52,3 @@ export let Dashboard = (props) => {
         </Container>
     )
 };
-

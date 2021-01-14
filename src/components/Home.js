@@ -10,12 +10,11 @@ export let Home = (props) => {
             {store.cars.map((car, idx) => (
                 <Card key={idx} className="card">
                     <CardContent className="text-gray">
-                        <span>{car.Name.toUpperCase()}</span>
+                        <span>{car.name.toUpperCase()}</span>
                         <ul>
-                        <li>Miles_per_Gallon: {car["Miles_per_Gallon"]}</li>
-                        <li>Cylinders: {car["Cylinders"]}</li>
-                        <li>Displacement: {car["Displacement"]}</li>
-                        <li>Horsepower: {car["Horsepower"]}</li>
+                        <li>Miles per Gallon: {car["mpg"]}</li>
+                        <li>Cylinders: {car["cylinders"]}</li>
+                        <li>Horsepower: {car["horsepower"]}</li>
                         </ul>
                     </CardContent>
                     <Divider />
