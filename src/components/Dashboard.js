@@ -5,11 +5,11 @@ import { Chart } from './Chart';
 import { Total } from './Total';
 import { StoreContext } from '../redux/store';
 import { AddCar } from './AddCar';
-import {ACTIONS, reducer} from '../redux/reducers';
+import { ACTIONS, reducer } from '../redux/reducers';
 
-export let Dashboard = (props) => {    
-    let { store, setStore } = useContext(StoreContext);
-    let [vals, dispatch] = useReducer(reducer, store);   
+export let Dashboard = (props) => {
+    let { store } = useContext(StoreContext);
+    let [dispatch] = useReducer(reducer, store);
 
     return (
         <Container maxWidth="lg" className="car-container">
@@ -17,7 +17,7 @@ export let Dashboard = (props) => {
             <div className="flex-container">
                 <Chart store={store} />
                 <Total store={store} />
-                <AddCar dispatch={dispatch}/>
+                <AddCar dispatch={dispatch} />
             </div>
             <Table>
                 <TableHead>
@@ -30,7 +30,7 @@ export let Dashboard = (props) => {
                         <TableCell>Delete</TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>                    
+                <TableBody>
                     {store.cars.map(car => (
                         <TableRow key={car.id}>
                             <TableCell component="th" scope="row">
@@ -41,8 +41,8 @@ export let Dashboard = (props) => {
                             <TableCell>{car["cylinders"]}</TableCell>
                             <TableCell>{car["horsepower"]}</TableCell>
                             <TableCell>
-                                <DeleteIcon                                    
-                                    onClick={() => dispatch({type: ACTIONS.DELETE_CAR, payload: {id: car.id}})}
+                                <DeleteIcon
+                                    onClick={() => dispatch({ type: ACTIONS.DELETE_CAR, payload: { id: car.id } })}
                                     className="icon text-red" />
                             </TableCell>
                         </TableRow>
