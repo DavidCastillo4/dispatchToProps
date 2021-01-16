@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
 
 export let Chart = ({ store }) => {

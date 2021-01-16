@@ -1,11 +1,11 @@
 import React, { Fragment, useState } from 'react';
 import { Button, TextField, Dialog, DialogContent, DialogTitle } from '@material-ui/core';
-import { ACTIONS } from '../redux/reducers';
+import { ACTIONS } from '../redux/store';
 
 export let AddCar = ({ dispatch }) => {
-  let emptyCar = { 'id': 0, 'name': '', 'mpg': '', 'cylinders': '', 'horsepower': '' };
+  let vehicle = { 'id': 0, 'name': '', 'mpg': '', 'cylinders': '', 'horsepower': '' };
   let [dialog, setDialog] = useState(false);
-  let [state, setState] = useState(emptyCar);
+  let [state, setState] = useState(vehicle);
 
   let toggleDialog = () => setDialog((prevState) => !prevState);
 
@@ -18,7 +18,7 @@ export let AddCar = ({ dispatch }) => {
   let submit = (e) => {
     e.preventDefault();
     dispatch({ type: ACTIONS.ADD_CAR, payload: { ...state } })
-    setState(emptyCar);
+    setState(vehicle);
     toggleDialog();
   };
 

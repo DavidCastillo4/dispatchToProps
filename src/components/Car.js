@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { Container, Paper, Chip } from '@material-ui/core';
-import { StoreContext } from '../redux/store';
+import { Context } from '../redux/store';
 
 export let Car = (props) => {
     let id = props.match.params.id;
-    let { store } = useContext(StoreContext);
-    let car = store.cars.find(c => c.id.toString() === id)
+    let state = useContext(Context);
+    let car = state.Store.cars.find(c => c.id.toString() === id)
     return (
         <Container maxWidth="sm" className="car-container">
             <Paper className="car-paper">

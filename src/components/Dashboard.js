@@ -1,23 +1,21 @@
-import React, { useContext, useReducer } from 'react';
+import React, { useContext } from 'react';
 import { Container, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Chart } from './Chart';
 import { Total } from './Total';
-import { StoreContext } from '../redux/store';
 import { AddCar } from './AddCar';
-import { ACTIONS, reducer } from '../redux/reducers';
+import { Context, ACTIONS } from '../redux/store';
 
-export let Dashboard = (props) => {
-    let { store } = useContext(StoreContext);
-    let [dispatch] = useReducer(reducer, store);
+export let Dashboard = () => {
+    let state = useContext(Context);
 
     return (
         <Container maxWidth="lg" className="car-container">
-            <h4>Welcome, {`${store.user.username}`}</h4>
+            <h4>Welcome, {`${state.Store.user.username}`}</h4>
             <div className="flex-container">
-                <Chart store={store} />
-                <Total store={store} />
-                <AddCar dispatch={dispatch} />
+                <Chart store={state.Store} />
+                <Total store={state.Store} />
+                <AddCar dispatch={state.Dispatch} />
             </div>
             <Table>
                 <TableHead>
@@ -31,7 +29,7 @@ export let Dashboard = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {store.cars.map(car => (
+                    {state.Store.cars.map(car => (
                         <TableRow key={car.id}>
                             <TableCell component="th" scope="row">
                                 {car.id}
@@ -42,7 +40,7 @@ export let Dashboard = (props) => {
                             <TableCell>{car["horsepower"]}</TableCell>
                             <TableCell>
                                 <DeleteIcon
-                                    onClick={() => dispatch({ type: ACTIONS.DELETE_CAR, payload: { id: car.id } })}
+                                    onClick={() => state.Dispatch({ type: ACTIONS.DELETE_CAR, payload: { id: car.id } })}
                                     className="icon text-red" />
                             </TableCell>
                         </TableRow>
