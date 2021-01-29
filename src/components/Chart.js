@@ -1,8 +1,7 @@
 import React from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
 
-export let Chart = ({ store }) => {
-
+export let Chart = ({ store }) => {    
     let over = store.cars.reduce((accumulator, car) =>
         accumulator + (car.horsepower >= 200 ? 1 : 0), 0
     );

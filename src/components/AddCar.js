@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Button, TextField, Dialog, DialogContent, DialogTitle } from '@material-ui/core';
 import { ACTIONS } from '../redux/store';
 
-export let AddCar = ({ dispatch }) => {
+export let AddCar = ({ dispatch }) => {  
   let vehicle = { 'id': 0, 'name': '', 'mpg': '', 'cylinders': '', 'horsepower': '' };
   let [dialog, setDialog] = useState(false);
   let [state, setState] = useState(vehicle);
